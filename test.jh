@@ -1,0 +1,86 @@
+
+application {
+  config {
+    baseName myApp,
+    applicationType gateway,
+    packageName com.myapp,
+    authenticationType jwt,
+    prodDatabaseType mysql
+    }
+  entities *
+}
+
+application {
+  config {
+    baseName myApp1,
+    applicationType microservice,
+    packageName com.myapp,
+    authenticationType jwt,
+    prodDatabaseType mysql,
+  }
+  entities Job, Employee
+}
+
+application {
+  config {
+    baseName myApp2,
+    applicationType microservice,
+    packageName com.myapp,
+    authenticationType jwt,
+    prodDatabaseType mysql,
+  }
+  entities C
+}
+
+entity A {}
+
+entity B {}
+
+entity C {}
+
+entity D {}
+
+relationship OneToMany {
+  A to B
+}
+
+
+entity Employee {
+	/**
+	* The firstname attribute.
+	*/
+	firstName String,
+	lastName String,
+	email String,
+	phoneNumber String,
+	hireDate Instant,
+	salary Long,
+	commissionPct Long
+}
+
+entity Job {
+	jobTitle String,
+	minSalary Long,
+	maxSalary Long
+}
+
+enum Language {
+    FRENCH, ENGLISH, SPANISH
+}
+
+
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Employee to Job{employee}
+		
+}
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruc
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
